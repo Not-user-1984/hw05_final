@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}
+Посты автора
+{% endblock  %}
+{% block header %}Посты автора{% endblock %}
+{% block content %}
+  {% for post in page_obj %}
+  {% include 'includes/posts.html' %}
+  {% endfor %}
+{% endblock  %}
