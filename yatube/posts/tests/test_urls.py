@@ -79,14 +79,16 @@ class PostsURlTests(TestCase):
         response = (self.client.get(f'posts/{self.post.id},/comment/'))
         self.assertEqual(response.status_code, HTTPStatus.NOT_FOUND,)
 
-    # def test_post_url_commits_authorized_client(self):
-    #     response = (
-    #         self.authorized_client.get(f'posts/{self.post.id},/comment/,', follow=True)
-    #     )
-    #     self.assertEqual(
-    #         response.status_code,
-    #         HTTPStatus.OK,
-    #     )
+    def test_post_url_commits_authorized_client(self):
+        response = (
+            self.authorized_client.get(
+                f'posts/{self.post.id},/comment/,',
+                follow=True)
+        )
+        self.assertEqual(
+            response.status_code,
+            HTTPStatus.NOT_FOUND,
+        )
 
     def test_post_url_create_post_guest_client(self):
         """Проверка доспупа на переброс при создание поста гостем на
@@ -101,7 +103,7 @@ class PostsURlTests(TestCase):
         )
         self.assertRedirects(
             response,
-            ('/auth/signup/?next=%2Fcreate%2F')
+            ('/auth/login/?next=%2Fcreate%2F')
         )
 
     def test_urls_uses_correct_template(self):

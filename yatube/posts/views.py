@@ -82,16 +82,14 @@ def post_create(request):
         form = form.save(commit=False)
         form.author = request.user
         form.save()
-        return redirect('posts:profile',
-                        username=form.author
-                        )
-    context = {
-        'form': form,
-    }
+        return redirect(
+            'posts:profile',
+            username=form.author
+        )
     return render(
         request,
         'posts/create_post.html',
-        context,
+        {'form': form}
     )
 
 
@@ -133,7 +131,11 @@ def add_comment(request, post_id):
 def follow_index(request):
     post_list = Post.objects.filter(author__following__user=request.user)
     page_obj = _add_paginator_page(request, post_list)
-    return render(request, 'posts/follow.html', {'page_obj': page_obj})
+    return render(
+        request,
+        'posts/follow.html',
+        {'page_obj': page_obj}
+    )
 
 
 @login_required
@@ -141,9 +143,10 @@ def profile_follow(request, username):
     author = get_object_or_404(User, username=username)
     if request.user != author:
         Follow.objects.get_or_create(user=request.user, author=author)
-    return redirect('posts:profile',
-                    username=username
-                    )
+    return redirect(
+        'posts:profile',
+        username=username
+    )
 
 
 @login_required
@@ -154,4 +157,4 @@ def profile_unfollow(request, username):
     return redirect(
         'posts:profile',
         username=username
-        )
+    )
