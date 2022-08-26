@@ -1,11 +1,11 @@
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.cache import cache_page
 
 from .forms import CommentForm, PostForm
-from .models import Group, Post, User, Follow
+from .models import Follow, Group, Post, User
 from .utls import _add_paginator_page
-from django.conf import settings
 
 
 @cache_page(settings.CACHE_TIME, key_prefix='index_page')

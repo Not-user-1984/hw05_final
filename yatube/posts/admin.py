@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Post, Group, Comment
+
+from .models import Comment, Group, Post
 
 
 @admin.register(Post)
@@ -27,7 +28,7 @@ class GroupAdmin(admin.ModelAdmin):
 
 
 @admin.register(Comment)
-class CommitAdmin(admin.ModelAdmin):
+class CommentAdmin(admin.ModelAdmin):
     list_display = (
         'pk',
         'text',

@@ -210,6 +210,14 @@ class PostPagesTests(TestCase):
                 kwargs={"username": self.user_2}
             )
         )
+
+        self.authorized_client.get(
+            reverse(
+                "posts:profile_follow",
+                kwargs={"username": self.user_2}
+            )
+        )
+
         my_follows = self.authorized_client.get(
             reverse(
                 "posts:follow_index",

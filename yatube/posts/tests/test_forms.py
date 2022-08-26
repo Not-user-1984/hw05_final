@@ -105,7 +105,7 @@ class PostFormTest(TestCase):
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertEqual(Post.objects.filter(**data_edit).exists(), True)
 
-    def test_form_commits(self):
+    def test_form_commets(self):
         """Тест что после успешной отправки комментарий
         появляется на странице поста"""
         post_in_commit = Post.objects.create(
